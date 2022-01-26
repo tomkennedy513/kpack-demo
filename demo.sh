@@ -26,13 +26,13 @@ kp clusterstore save default --buildpackage gcr.io/paketo-buildpacks/go@sha256:3
 kp clusterstack save default --build-image paketobuildpacks/build:1.3.18-tiny-cnb --run-image paketobuildpacks/run:1.3.18-tiny-cnb
 
 #_ECHO_# Create a ClusterBuilder
-kp clusterbuilder save default --tag projects.registry.vmware.com/ktom/builder --stack default --store default --buildpack paketo-buildpacks/go
+kp clusterbuilder save default --tag $DEFAULT_REPO/builder --stack default --store default --buildpack paketo-buildpacks/go
 
 #_ECHO_# Create a Secret
 kp secret create registry-secret --registry $REGISTRY --registry-user $REGISTRY_USERNAME
 
 #_ECHO_# Create an Image
-kp image save test-image --tag projects.registry.vmware.com/ktom/test-image --git https://github.com/paketo-buildpacks/samples --git-revision 284b0e4e432c0eeda078eb64810b13764719bcc9 --sub-path go/mod --cluster-builder default --wait
+kp image save test-image --tag $DEFAULT_REPO/test-image --git https://github.com/paketo-buildpacks/samples --git-revision 284b0e4e432c0eeda078eb64810b13764719bcc9 --sub-path go/mod --cluster-builder default --wait
 kp build list test-image
 
 #_ECHO_# Patch an Image
