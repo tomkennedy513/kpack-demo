@@ -1,0 +1,5 @@
+#@ load("@ytt:data", "data")
+---
+kp_default_repository: #@ data.values.default_repository
+kp_default_repository_username: #@ data.values.default_repository_username
+kp_default_repository_password: #@ data.values.default_repository_password
